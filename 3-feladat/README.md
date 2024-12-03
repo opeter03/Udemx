@@ -123,7 +123,7 @@ Létrehozzuk a mappát és belépünk
 
 `mkdir -p ~/compose-demo && cd $_`
 
-Kiklónozzuk
+Kiklónozzuk az alábbi helyről: https://github.com/opeter03/udemx-laravel
 
 `git clone https://github.com/opeter03/udemx-laravel.git .`
 
