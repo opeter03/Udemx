@@ -57,7 +57,7 @@ Ellenőrés:
 
 Jelszó generálás új usernek (segédprogram):
 
-`apt install makepasswd`
+`sudo apt install makepasswd`
 
 `makepasswd --chars 12`
 
@@ -73,7 +73,7 @@ Ellenőrés:
 
 #### ssh elérés beállítása
 
-`cp /etc/ssh/sshd_config /etc/ssh/sshd_config.backup`
+`sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.backup`
 
 Alábbi fájl megnyitása:
 
@@ -85,7 +85,7 @@ Port 22 -> Port 33333
 
 Újraindítás:
 
-`service ssh restart`
+`sudo service ssh restart`
 
 Ellenőrés (így csak saját host-ról):
 
@@ -114,6 +114,45 @@ Ellenőrzések:
 `ssh opeter03@localhost -o PreferredAuthentications=password -o PubkeyAuthentication=no -p 33333`
 
 `ssh opeter03@localhost -p 33333 -i ~/.ssh/id_rsa`
+
+
+fail2ban telepítése és konfigurálása:
+
+`sudo apt install fail2ban`
+
+`sudo systemctl status fail2ban`
+
+`sudo systemctl enable fail2ban`
+
+
+`sudo cp jail.conf jail.local`
+
+Alábbi fájlban:
+/etc/fail2ban/jail.local
+
+Az [sshd] szekció alá:
+
+enabled = true
+
+port = 33333
+
+`sudo systemctl restart fail2ban`
+
+Ellenőrzések:
+
+Az ellenőrzéshez ideiglenesen ki kell venni a /etc/ssh/sshd_config-ból a "PasswordAuthentication no" részt.
+Töbször lefuttatni:
+
+`ssh asdqwe@localhost -p 33333`
+
+Egy idő után (config: maxretry) ezt fogja kiírni 10 percre (config: bantime):
+
+"ssh: connect to host localhost port 33333: Connection refused"
+
+
+
+
+
 
 
 
