@@ -75,6 +75,20 @@ Változások mentése
 
 ## Írni egy-egy külön shell scriptet
 
+### Mysql dump
+
+A mellékelt jelszó fájl létrehozása
+
+`sudo su -`
+
+`chmod 600 /root/.my.cnf`
+
+Mellékelt script megírása a /root/scripts mappába
+
+crontab-ba állítás root alá
+
+`crontab -e`
+"0 2 * * * /root/scripts/mysqldump.sh >/dev/null 2>&1"
 
 
 
