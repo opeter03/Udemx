@@ -158,13 +158,71 @@ https://testsec.home
 http://testbase.home
 
 
-
-
-
-
 ## Git telepítése
 
 
+
+Ellenőrzés, hogy fel van-e telepítve, ha nem, akkor telepítés
+
+`git --version`
+
+`apt install git`
+
+
+Global user lekérdezés, és beállítás
+
+`git config --list`
+
+`git config --global user.name`
+
+`git config --global user.email`
+
+`git config --global user.name "udemx"`
+
+`git config --global user.email "udemx@udemx.eu"`
+
+
+Git user létrehozás és egy mappa a repoknak
+
+`makepasswd --chars 12`
+
+wDw1gcxQDRPr
+
+`sudo adduser git`
+
+`sudo mkdir -p /var/git/storage`
+
+`sudo chown -R git:git /var/git`
+
+
+Átlépés git user-be. Egy project mappa létrehozás és git init.
+
+`su -l git`
+
+`mkdir -p ~/.ssh`
+
+`mkdir -p /var/git/storage/firstproject && cd $_`
+
+`git init --bare`
+
+
+opeter03 user publikus kulcsát fűzzük a git user authorized_keys fájlához, majd minden olyan user pub kulcsát, aki gitet akar használni
+
+`sudo touch /home/git/.ssh/authorized_keys`
+
+`sudo su -`
+
+`cat /home/opeter03/.ssh/id_rsa.pub >> /home/git/.ssh/authorized_keys`
+
+`chown git:git /home/git/.ssh/authorized_keys`
+
+`chmod 600 /home/git/.ssh/authorized_keys`
+
+Ellenőrzés opeter user-ként:
+
+`cd /tmp`
+
+`git clone ssh://git@localhost:33333/var/git/storage/firstproject`
 
 
 
