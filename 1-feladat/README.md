@@ -71,11 +71,49 @@ Ellenőrés:
 
 `cat /etc/passwd | tail -1`
 
+#### ssh elérés beállítása
+
+`cp /etc/ssh/sshd_config /etc/ssh/sshd_config.backup`
+
+Alábbi fájl megnyitása:
+
+/etc/ssh/sshd_config
+
+Alábbi sor átírása:
+
+Port 22 -> Port 33333
+
+Újraindítás:
+
+`service ssh restart`
+
+Ellenőrés (így csak saját host-ról):
+
+`ssh opeter03@localhost`
+
+`ssh opeter03@localhost -p 33333`
 
 
+PEM alapú belépés (saját hostról saját hostra jelen esetben). opeter03 userrel kulcspár generálás.
+
+`ssh-keygen -t rsa -b 4096`
+
+`ssh-copy-id -p 33333 opeter03@localhost`
+
+`chmod 600 ~/.ssh/id_rsa.pub`
+
+`ssh opeter03@localhost -p 33333 -i ~/.ssh/id_rsa`
+
+`echo 'PasswordAuthentication no' | sudo tee -a /etc/ssh/sshd_config`
+
+`sudo service ssh restart`
 
 
+Ellenőrzések:
 
+`ssh opeter03@localhost -o PreferredAuthentications=password -o PubkeyAuthentication=no -p 33333`
+
+`ssh opeter03@localhost -p 33333 -i ~/.ssh/id_rsa`
 
 
 
