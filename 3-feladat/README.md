@@ -60,8 +60,7 @@ Ping engedése
 
 `sudo iptables -A INPUT -p icmp -m icmp --icmp-type 8 -j ACCEPT`
 
-#egyéb
-sudo iptables -A INPUT -m limit --limit 5/min -j LOG --log-prefix "iptables denied: " --log-level 7
+`sudo iptables -A INPUT -m limit --limit 5/min -j LOG --log-prefix "iptables denied: " --log-level 7`
 
 Minden más bejövő forgalom visszautasítása:
 
