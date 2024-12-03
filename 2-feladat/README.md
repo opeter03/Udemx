@@ -83,7 +83,7 @@ saját volume létrehozása mysql adatok tárolására (/var/libdocker/volumes)
 
 `docker volume create mariadb-server-volume`
 
-MARIADB Docker létrehozás futtatás háttérben automatikus elinduláskor rebootnál is
+MARIADB Docker konténer létrehozás futtatás háttérben automatikus elinduláskor rebootnál is
 
 `docker run -p 127.0.0.1:3306:3306 -v mariadb-server-volume:/var/lib/mysql --restart always --detach --name mariadb-server1 --env MARIADB_USER=udemx --env MARIADB_PASSWORD=FWLtLnbPIDUr --env MARIADB_DATABASE=udemx-db --env MARIADB_ROOT_PASSWORD=vvzPjX4Sh9QQ  mariadb:latest`
 
@@ -105,6 +105,49 @@ Mariadb kliens (csak!) telepítése a fő hosztre
 `show databases;`
 
 ### NGINX container futtatása
+
+NGINX konténer lehúzása innen: https://hub.docker.com/_/nginx
+
+`docker pull nginx`
+
+Volumeok létrehozása
+
+`docker volume create nginx-server-http`
+
+`docker volume create nginx-server-https`
+
+NGINX konténerek létrehozása, futtatása háttérben automatikus elinduláskor rebootnál is
+
+`docker run --restart always --detach -p 8081:80 --name nginx-server-http -v nginx-server-http:/usr/share/nginx/html:ro -d nginx`
+
+`docker run --restart always --detach -p 8082:80 --name nginx-server-https -v nginx-server-https:/usr/share/nginx/html:ro -d nginx`
+
+Önaláírt ssl generálása, beállítása:
+
+`sudo mkdir /etc/nginx/ssl`
+
+`sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/ssl/nginx-testsec.key -out /etc/nginx/ssl/nginx-testsec.crt`
+
+`sudo openssl dhparam -out /etc/nginx/dhparam.pem 4096`
+
+Az /etc/nginx/snippets/ssl-params.conf felvétele a mellékelt fájl alapján
+
+Felvesszük a teszt domaineket a hosts fájlba a hoszton
+
+`echo '127.0.0.1 testbase.home' | sudo tee -a /etc/hosts`
+
+`echo '127.0.0.1 testsec.home' | sudo tee -a /etc/hosts`
+
+Felvesszük az /etc/nginx/sites-available mappába a mellékelt fájlokat (testbase, testsec) vagyis a virtual hostokat. Majd symlinkeljük a /etc/nginx/sites-enabled alá.
+
+Volumeokban módosítani a index.html-t:
+/var/lib/docker/volumes/nginx-server-http/_data
+/var/lib/docker/volumes/nginx-server-https/_data
+
+
+Újraindítjuk az NGINX-et:
+
+`nginx -t && service nginx restart`
 
 
 
