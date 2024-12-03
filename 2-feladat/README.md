@@ -141,13 +141,23 @@ Felvesszük a teszt domaineket a hosts fájlba a hoszton
 Felvesszük az /etc/nginx/sites-available mappába a mellékelt fájlokat (testbase, testsec) vagyis a virtual hostokat. Majd symlinkeljük a /etc/nginx/sites-enabled alá.
 
 Volumeokban módosítani a index.html-t a mellékelt fájlokkal (https/index.html, http/index.html):
+
 /var/lib/docker/volumes/nginx-server-http/_data
+
 /var/lib/docker/volumes/nginx-server-https/_data
 
 
 Újraindítjuk az NGINX-et:
 
-`nginx -t && service nginx restart`
+`sudo nginx -t && sudo service nginx restart`
+
+Ellenőrzés:
+
+https://testsec.home
+
+http://testbase.home
+
+
 
 
 
