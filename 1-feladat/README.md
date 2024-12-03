@@ -140,7 +140,7 @@ port = 33333
 
 Ellenőrzések:
 
-Az ellenőrzéshez ideiglenesen ki kell venni a /etc/ssh/sshd_config-ból a "PasswordAuthentication no" részt.
+Az ellenőrzéshez ideiglenesen ki kell venni a /etc/ssh/sshd_config-ból a "PasswordAuthentication no" részt. Valamint a /etc/fail2ban/jail.local fájlban az alábbi sort beállítani: ignoreself = false.
 Töbször lefuttatni:
 
 `ssh asdqwe@localhost -p 33333`
