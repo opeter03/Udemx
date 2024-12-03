@@ -1,0 +1,17 @@
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+
+    server_name testsec.home;
+
+    include snippets/ssl-params.conf;
+    ssl_certificate         /etc/nginx/ssl/nginx-testsec.crt;
+    ssl_certificate_key     /etc/nginx/ssl/nginx-testsec.key;
+
+    access_log /var/log/nginx/testsec-access.log;
+    error_log  /var/log/nginx/testsec-error.log;
+
+    location / {
+        proxy_pass  http://127.0.0.1:8082;
+    }
+}
