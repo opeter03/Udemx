@@ -75,7 +75,7 @@ Változások mentése
 
 ## Írni egy-egy külön shell scriptet
 
-### Mysql dump
+### Mysql dump cron-ba
 
 A mellékelt jelszó fájl létrehozása
 
@@ -97,8 +97,27 @@ Ellenőrzés:
 
 /var/backups/databases
 
+### a 3 legutoljára módosított fájl listázása...
+
+Mellékelt last3logfiles.sh
+
+### 5 napon belül módosított fájlok listázása...
+
+Mellékelt 5dayslogfiles.sh
+
+### A /proc/loadavg-ból a 15 perces érték kiíratása...
+
+Mellékelt loadavg.sh
+
+### Az NGINX default konfigurációs fájljában az alábbi sztringben...
+
+Mellékelt nginx.sh
+
+
 
 ## Docker project feladat
+
+
 
 
 
