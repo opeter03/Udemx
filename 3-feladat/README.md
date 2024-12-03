@@ -85,11 +85,17 @@ A mellékelt jelszó fájl létrehozása
 
 Mellékelt script megírása a /root/scripts mappába
 
+`chmod 744 /root/scripts/mysqldump.sh`
+
 crontab-ba állítás root alá
 
 `crontab -e`
+
 "0 2 * * * /root/scripts/mysqldump.sh >/dev/null 2>&1"
 
+Ellenőrzés:
+
+/var/backups/databases
 
 
 ## Docker project feladat
