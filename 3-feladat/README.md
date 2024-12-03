@@ -4,9 +4,85 @@
 
 ## Iptables beállítása
 
+Megnézzük fenn van-e, ha nincs telepítjük:
+
+`sudo iptables --version`
+
+`sudo apt update`
+
+`sudo apt install iptables`
+
+Segédprogram, hogy a beállított szabályok újraindítás után is megmaradjanak
+
+`sudo apt install iptables-persistent`
+
+Bekapcsolás, induláskor is menjen majd
+
+`sudo systemctl enable netfilter-persistent`
+
+`sudo systemctl status netfilter-persistent`
+
+Megnézzük milyen szabályok vannak beállítva
+
+`sudo iptables -L -v`
+
+`sudo iptables -L --line-numbers`
+
+sudo iptables -D INPUT 5
+sudo iptables -D FORWARD 7
+
+
+Belső hálózati forgalom engedése (hurkok):
+
+`sudo iptables -A INPUT -i lo -j ACCEPT`
+
+`sudo iptables -A INPUT ! -i lo -d 127.0.0.0/8 -j REJECT`
+
+`sudo iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT`
+
+`sudo iptables -A OUTPUT -o lo -j ACCEPT`
+
+Minden kimenő forgalom engedése:
+
+`sudo iptables -A OUTPUT -j ACCEPT`
+
+Minden bejövő SSH kapcsolatot enged
+
+`sudo iptables -A INPUT -p tcp -m state --state NEW --dport 33333 -j ACCEPT`
+
+Minden webes forgalom engedése (HTTP, HTTPS):
+
+`sudo iptables -A INPUT -p tcp --dport 80 -j ACCEPT`
+
+`sudo iptables -A INPUT -p tcp --dport 443 -j ACCEPT`
+
+Ping engedése
+
+`sudo iptables -A INPUT -p icmp -m icmp --icmp-type 8 -j ACCEPT`
+
+#egyéb
+sudo iptables -A INPUT -m limit --limit 5/min -j LOG --log-prefix "iptables denied: " --log-level 7
+
+Minden más bejövő forgalom visszautasítása:
+
+`sudo iptables -A INPUT -j REJECT`
+
+`sudo iptables -A FORWARD -j REJECT`
+
+Változások mentése
+
+`sudo netfilter-persistent save`
+
 
 ## Írni egy-egy külön shell scriptet
 
 
+
+
 ## Docker project feladat
+
+
+
+
+
 
