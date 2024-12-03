@@ -117,6 +117,12 @@ Mellékelt nginx.sh
 
 ## Docker project feladat
 
+A docker compose felkerül a docker-rel együtt.
+
+Létrehozzuk a mappát és belépünk
+
+`mkdir -p ~/compose-demo && cd $_`
+
 
 
 
