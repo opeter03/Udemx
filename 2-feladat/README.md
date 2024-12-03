@@ -151,7 +151,7 @@ Volumeokban módosítani a index.html-t a mellékelt fájlokkal (https/index.htm
 
 `sudo nginx -t && sudo service nginx restart`
 
-Ellenőrzés:
+Ellenőrzés a számunkra szinpatikus böngészővel vagy WGET-tel:
 
 https://testsec.home
 
