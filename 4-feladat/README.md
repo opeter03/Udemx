@@ -65,10 +65,54 @@ Többit értelemszerűen kitölteni
 Ellenőrzés: Ha minden jól ment, akkor a baloldali sávban megjelenik az új node (pirox X nélkül), amit a jenkins így SSH kulcspárral ér el.
 
 
-
-
-
 ## Privát Docker registry telepítése dockerben
+
+
+Létrehozunk egy mappát:
+`mkdir -p ~/docker-registry && cd $_`
+
+Létrehozzuk a yaml fájlt (mellékelve)
+`touch docker-compose.yaml`
+
+Léterhozzuk a volume mappát, ahol lesznek tárolva a privát imagek
+`mkdir volume`
+
+Beállítjuk, hogy autentikáció nélkül is lehessen konnektálni, ezt root-ként kell megcsinálni:
+/etc/hosts fájbla betesszük a registry domainünket
+127.0.0.1 docker-registry.local.com
+
+Alábbi fájlt létrehozzuk, alábbi tartalommal
+touch /etc/docker/deamon.json
+{
+    "insecure-registries": ["docker-registry.local.com"]
+}
+
+#újrarúgjuk a dockert
+systemctl stop docker
+systemctl start docker
+
+#indtjuk akkor most már a saját registrinket végre, de már opeter03 felhazsnálóval
+docker compose up -d
+
+#ellenőrzés, fut-e
+docker ps
+http://localhost:8500
+
+#tesztelés, vagyis egy kép beletolása:
+docker pull nginx
+docker images
+docker tag nginx:latest docker-registry.local.com:5000/docker-registry/nginx:v1
+docker images
+docker push docker-registry.local.com:5000/docker-registry/nginx:v1
+docker pull docker-registry.local.com:5000/docker-registry/nginx:v1
+
+#ellenőrizzük webes felületen is, hogy megtörént-e a push
+http://localhost:8500
+
+
+
+
+
 
 
 ## Githubon egy privát repó és egy új projekt létrehozása
