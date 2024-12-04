@@ -46,7 +46,7 @@ Minden kimenő forgalom engedése:
 
 `sudo iptables -A OUTPUT -j ACCEPT`
 
-Minden bejövő SSH kapcsolatot enged
+Minden bejövő SSH kapcsolatot enged:
 
 `sudo iptables -A INPUT -p tcp -m state --state NEW --dport 33333 -j ACCEPT`
 
@@ -56,7 +56,7 @@ Minden webes forgalom engedése (HTTP, HTTPS):
 
 `sudo iptables -A INPUT -p tcp --dport 443 -j ACCEPT`
 
-Ping engedése
+Ping engedése:
 
 `sudo iptables -A INPUT -p icmp -m icmp --icmp-type 8 -j ACCEPT`
 
@@ -68,7 +68,7 @@ Minden más bejövő forgalom visszautasítása:
 
 `sudo iptables -A FORWARD -j REJECT`
 
-Változások mentése
+Változások mentése:
 
 `sudo netfilter-persistent save`
 
@@ -146,11 +146,11 @@ Beállításokat megváltoztatjuk
 `awk -F= ' $1=="# DB_PASSWORD" {printf "DB_PASSWORD=%s\n","tNbxUECKq"; next}1' .env > /tmp/.env && mv /tmp/.env .env`
 
 
-Volume létrehozása az adatábzisnak
+Volume létrehozása az adatbázisnak
 
 `docker volume create udemx-laravel-mysql-server-volume`
 
-#docker konténer buildelés és indítás
+Docker konténer buildelés és indítás
 
 `docker compose build app`
 
