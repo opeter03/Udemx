@@ -115,10 +115,31 @@ Tesztelés, vagyis egy kép beletolása:
 
 ## Githubon egy privát repó és egy új projekt létrehozása
 
-
-
+A mellékelt testrepo/Dockerfile-ban található a project.
 
 ## Jenkins job létrehozása
 
+Létrehozzuk a jenkinsbe az új freestyle típusú jobot, adunk neki egy nevet, majd odagörgetünk a "Source Code Management" szekcióhoz és bepipáljuk a gitet.
+Repository URL: https://github.com/opeter03/testrepo.git
 
+A Credentials részben az Add gombra kattintunk. Hozzáadjuk a Jenkins-t. Ekkor felugrik egy ablak, amiben meg kell adni az azonosítás módját. Privát github repo esetében erre 2 módszer van: SSH keys, vagy access token-es. A mellékelt képen látható a kitöltés folyamata. Ha megfelelő a csatlakozás, akkor a Repository URL alatt eltűnik a piros hibaszöveg.
+
+A "Branches to build" részben a master helyett lehet hogy main-t kell beírni, ezt nézzük meg a githubon hogy nevezi el nekünk.
+
+A "Build Environment"-ben a "Delete workspace before build starts" kiválasztjuk igény szerint.
+
+
+A "Build Steps" részben execute shellt használunk, ahova beírjuk a shell parancsokat
+`docker image build -t docker-registry.local.com:5000/docker-private-web:v$BUILD_NUMBER .`
+`docker push docker-registry.local.com:5000/docker-private-web:v$BUILD_NUMBER`
+
+Majd hozzáadunk még egy execute részt
+`docker pull docker-registry.local.com:5000/docker-private-web:v$BUILD_NUMBER`
+`docker run -p 81$BUILD_NUMBER:80 --name docker-private-server-v$BUILD_NUMBER -d docker-registry.local.com:5000/docker-private-web:v$BUILD_NUMBER`
+
+Futtatjuk a buildet
+
+Ellenőrzés (első build esetén):
+
+http://localhost:811
 
