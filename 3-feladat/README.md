@@ -169,3 +169,17 @@ Laravel specifikus inicializációs parancsok futtatása
 Ellenőrzés:
 
 http://localhost:8090
+
+
+
+
+## +1
+
+kilépés mentés nélkül:
+
+`ESC és :q!`
+
+kilépés mentéssel:
+
+`ESC és wq!`
+
