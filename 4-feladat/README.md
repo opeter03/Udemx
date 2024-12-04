@@ -130,11 +130,16 @@ A "Build Environment"-ben a "Delete workspace before build starts" kiválasztjuk
 
 
 A "Build Steps" részben execute shellt használunk, ahova beírjuk a shell parancsokat
+
 `docker image build -t docker-registry.local.com:5000/docker-private-web:v$BUILD_NUMBER .`
+
+
 `docker push docker-registry.local.com:5000/docker-private-web:v$BUILD_NUMBER`
 
 Majd hozzáadunk még egy execute részt
+
 `docker pull docker-registry.local.com:5000/docker-private-web:v$BUILD_NUMBER`
+
 `docker run -p 81$BUILD_NUMBER:80 --name docker-private-server-v$BUILD_NUMBER -d docker-registry.local.com:5000/docker-private-web:v$BUILD_NUMBER`
 
 Futtatjuk a buildet
