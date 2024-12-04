@@ -81,24 +81,23 @@ Beállítjuk, hogy autentikáció nélkül is lehessen konnektálni, ezt root-k�
 /etc/hosts fájbla betesszük a registry domainünket
 127.0.0.1 docker-registry.local.com
 
-Alábbi fájlt létrehozzuk, alábbi tartalommal
+Alábbi fájlt létrehozzuk, a mellékelt tartalommal
 touch /etc/docker/deamon.json
-{
-    "insecure-registries": ["docker-registry.local.com"]
-}
 
-#újrarúgjuk a dockert
-systemctl stop docker
-systemctl start docker
+Újrarúgjuk a dockert
 
-#indtjuk akkor most már a saját registrinket végre, de már opeter03 felhazsnálóval
-docker compose up -d
+`systemctl restart docker`
 
-#ellenőrzés, fut-e
-docker ps
+Indtjuk  most már a saját registrinket, de már opeter03 felhazsnálóval
+`docker compose up -d`
+
+Ellenőrzés, fut-e
+
+`docker ps`
+
 http://localhost:8500
 
-#tesztelés, vagyis egy kép beletolása:
+Tesztelés, vagyis egy kép beletolása:
 docker pull nginx
 docker images
 docker tag nginx:latest docker-registry.local.com:5000/docker-registry/nginx:v1
@@ -106,8 +105,6 @@ docker images
 docker push docker-registry.local.com:5000/docker-registry/nginx:v1
 docker pull docker-registry.local.com:5000/docker-registry/nginx:v1
 
-#ellenőrizzük webes felületen is, hogy megtörént-e a push
-http://localhost:8500
 
 
 
