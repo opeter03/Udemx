@@ -4,7 +4,7 @@
 
 ## NGINX webszerver telepítése
 
-Egyenlőre csak a hosta (nem docker-rel) a reverse proxy végett:
+Egyenlőre csak a host-ra (nem docker-rel) a reverse proxy végett:
 
 `apt install nginx`
 
@@ -13,7 +13,7 @@ Egyenlőre csak a hosta (nem docker-rel) a reverse proxy végett:
 `systemctl enable nginx`
 
 
-Ellenőrzés bögnészőben, wget-tel, vagy karakteres bögnészőben (tetszés szerint):
+Ellenőrzés böngészőben, wget-tel, vagy karakteres böngészőben (tetszés szerint):
 
 http://localhost
 
@@ -23,9 +23,7 @@ http://127.0.0.1
 
 `lynx http://127.0.0.1`
 
-
 `wget -O - http://127.0.0.1`
-
 
 
 
@@ -73,11 +71,11 @@ lehúzás helyi tárolóba innen: https://hub.docker.com/_/mariadb
 
 `docker pull mariadb`
 
-jelszó generálás
+jelszó generálás:
 
 `makepasswd --chars 12`
 
-saját volume létrehozása mysql adatok tárolására (/var/libdocker/volumes)
+saját volume létrehozása mysql adatok tárolására (/var/lib/docker/volumes)
 
 `docker volume ls`
 
@@ -92,7 +90,7 @@ Ellenőrzés:
 
 `docker top mariadb-server1`
 
-Mariadb kliens (csak!) telepítése a fő hosztre
+Mariadb kliens (csak!) telepítése a fő hosztra:
 
 `sudo apt -y install mariadb-client`
 
@@ -110,7 +108,7 @@ NGINX konténer lehúzása innen: https://hub.docker.com/_/nginx
 
 `docker pull nginx`
 
-Volumeok létrehozása
+Volume-ok létrehozása
 
 `docker volume create nginx-server-http`
 
@@ -140,7 +138,7 @@ Felvesszük a teszt domaineket a hosts fájlba a hoszton
 
 Felvesszük az /etc/nginx/sites-available mappába a mellékelt fájlokat (testbase, testsec) vagyis a virtual hostokat. Majd symlinkeljük a /etc/nginx/sites-enabled alá.
 
-Volumeokban módosítani a index.html-t a mellékelt fájlokkal (https/index.html, http/index.html):
+Volume-okban módosítani a index.html-t a mellékelt fájlokkal (https/index.html, http/index.html):
 
 /var/lib/docker/volumes/nginx-server-http/_data
 
@@ -223,17 +221,4 @@ Ellenőrzés opeter user-ként:
 `cd /tmp`
 
 `git clone ssh://git@localhost:33333/var/git/storage/firstproject`
-
-
-
-
-
-
-
-
-
-
-
-
-
 
