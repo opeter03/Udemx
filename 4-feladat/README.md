@@ -14,10 +14,10 @@ Ssh jenkins agent végett kulcspár generálás
 
 `ssh-keygen -t rsa -f jenkins_agent`
 
-A mellékelt jenkins mappában lévő fájlok id másolása és a docker-compose.yaml fájlban a JENKINS_AGENT_SSH_PUBKEY kulcsnak átadni értékként a generált puklibus kulcsot (jenkins_agent.pub).
-A fájlokban láthatóan meg lett oldva, hogy a jenkins (dockerben futtatva) elérje a külcső hoszt docker-jét (konténereit), így telepítve lett a docker.io és átadásra került a docker socket volume-ban. Ennek később lesz a jelentősége, amikor a jenkinsen kersztük pusholunk image-t pl.
+A mellékelt jenkins mappában lévő fájlok ide másolása és a docker-compose.yaml fájlban a JENKINS_AGENT_SSH_PUBKEY kulcsnak átadni értékként a generált puklibus kulcsot (jenkins_agent.pub).
+A fájlokban láthatóan meg lett oldva, hogy a jenkins (dockerben futtatva) elérje a külső hoszt docker-jét (konténereit), így telepítve lett a docker.io és átadásra került a docker socket volume-ban. Ennek később lesz a jelentősége, amikor a jenkinsen keresztül pusholunk image-t pl.
 
-Buildelést indítása
+Buildelés indítása
 
 `docker compose up -d`
 
@@ -38,7 +38,7 @@ ID:jenkins_agent
 Username:jenkins
 Private key megadása, amit ez alőbb generáltunk
 
-Új node léterhozása: manage jenkins->Nodes->New node
+Új node létrehozása: manage jenkins->Nodes->New node
 
 Node name: jenkins_agent
 
@@ -86,7 +86,7 @@ Beállítjuk, hogy autentikáció nélkül is lehessen konnektálni, ezt root-k�
 
 127.0.0.1 docker-registry.local.com
 
-Alábbi fájlt létrehozzuk, a mellékelt tartalommal
+Alábbi fájlt létrehozzuk, a mellékelt tartalommal (adott estben docker login kialakítása célszerűbb lenne)
 
 touch /etc/docker/deamon.json
 
@@ -94,7 +94,7 @@ touch /etc/docker/deamon.json
 
 `systemctl restart docker`
 
-Indtjuk  most már a saját registrinket, de már opeter03 felhazsnálóval
+Indtjuk most már a saját registry-nket, de már opeter03 felhasználóval
 
 `docker compose up -d`
 
@@ -129,10 +129,9 @@ A "Branches to build" részben a master helyett lehet hogy main-t kell beírni, 
 A "Build Environment"-ben a "Delete workspace before build starts" kiválasztjuk igény szerint.
 
 
-A "Build Steps" részben execute shellt használunk, ahova beírjuk a shell parancsokat
+A "Build Steps" részben execute shell-t használunk, ahova beírjuk a shell parancsokat
 
 `docker image build -t docker-registry.local.com:5000/docker-private-web:v$BUILD_NUMBER .`
-
 
 `docker push docker-registry.local.com:5000/docker-private-web:v$BUILD_NUMBER`
 
