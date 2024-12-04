@@ -1,10 +1,9 @@
 # Linux rendszer telepítése
 
 
-
 ## Debian 11 telepítése
 
-A telepítés VirtualBosban valósult meg.
+A telepítés VirtualBox-ban valósult meg.
 A feladatban megadott felhasználók létrehozásra kerültek.
 
 
@@ -13,7 +12,7 @@ A feladatban megadott felhasználók létrehozásra kerültek.
 
 ### Feltételek megteremtése (segédprogramok)
 
-Sajnos nem volt jó a sources.list alapból, így frissítenie kellet:
+Sajnos nem volt jó a sources.list alapból, így frissítenie kellet (mellékelt fájlban található):
 
 Átváltunk root-ba:
 
@@ -41,13 +40,13 @@ Java telepítések
 
 `sudo dpkg --install amazon-corretto-8-x64-linux-jdk.deb`
 
-Automatán a Java8-ra (Java 1.8 = Java8) áll. De az alábbi paranccsal áttudjuk állítani a defualt java futtatót:
+Automatán a Java8-ra (Java 1.8 = Java8) áll. De az alábbi paranccsal át tudjuk állítani a defualt java futtatót:
 
 `update-alternatives --config java`
 
 `update-alternatives --config javac`
 
-Ellenőrés:
+Ellenőrzés:
 
 `java -version`
 
@@ -63,7 +62,7 @@ Jelszó generálás új usernek (segédprogram):
 
 `sudo adduser udemx --home /opt/udemx`
 
-Ellenőrés: 
+Ellenőrzés:
 
 `sudo -i -u udemx`
 
@@ -87,14 +86,14 @@ Port 22 -> Port 33333
 
 `sudo service ssh restart`
 
-Ellenőrés (így csak saját host-ról):
+Ellenőrzés (így csak saját host-ról):
 
 `ssh opeter03@localhost`
 
 `ssh opeter03@localhost -p 33333`
 
 
-PEM alapú belépés (saját hostról saját hostra jelen esetben). opeter03 userrel kulcspár generálás.
+PEM alapú belépés (saját host-ról saját host-ra jelen esetben). opeter03 userrel kulcspár generálás.
 
 `ssh-keygen -t rsa -b 4096`
 
@@ -148,13 +147,3 @@ Töbször lefuttatni:
 Egy idő után (config: maxretry) ezt fogja kiírni 10 percre (config: bantime):
 
 "ssh: connect to host localhost port 33333: Connection refused"
-
-
-
-
-
-
-
-
-
-
