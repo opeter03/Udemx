@@ -144,7 +144,7 @@ Majd hozzáadunk még egy execute részt
 
 Futtatjuk a buildet
 
-Ellenőrzés (első build esetén):
+Ellenőrzés (első build esetén, a port mindig a megfelelő build számmal növekszik):
 
 http://localhost:811
 
