@@ -62,7 +62,7 @@ A Java path-ot ki lehet nézni az agent dockerbe belépve, mert nem mindig köve
 
 Többit értelemszerűen kitölteni
 
-Ha minden jól ment, akkor a baloldali sávban megjelenik az új node, amit a jenkins így SSH kulcspárral ér el.
+Ellenőrzés: Ha minden jól ment, akkor a baloldali sávban megjelenik az új node (pirox X nélkül), amit a jenkins így SSH kulcspárral ér el.
 
 
 
