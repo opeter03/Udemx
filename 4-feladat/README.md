@@ -113,14 +113,12 @@ Tesztelés, vagyis egy kép beletolása:
 `docker push docker-registry.local.com:5000/docker-registry/nginx:v1`
 
 
-
-
-
-
-
-
 ## Githubon egy privát repó és egy új projekt létrehozása
 
 
+
+
 ## Jenkins job létrehozása
+
+
 
