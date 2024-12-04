@@ -69,19 +69,25 @@ Ellenőrzés: Ha minden jól ment, akkor a baloldali sávban megjelenik az új n
 
 
 Létrehozunk egy mappát:
+
 `mkdir -p ~/docker-registry && cd $_`
 
 Létrehozzuk a yaml fájlt (mellékelve)
+
 `touch docker-compose.yaml`
 
 Léterhozzuk a volume mappát, ahol lesznek tárolva a privát imagek
+
 `mkdir volume`
 
 Beállítjuk, hogy autentikáció nélkül is lehessen konnektálni, ezt root-ként kell megcsinálni:
+
 /etc/hosts fájbla betesszük a registry domainünket
+
 127.0.0.1 docker-registry.local.com
 
 Alábbi fájlt létrehozzuk, a mellékelt tartalommal
+
 touch /etc/docker/deamon.json
 
 Újrarúgjuk a dockert
@@ -89,6 +95,7 @@ touch /etc/docker/deamon.json
 `systemctl restart docker`
 
 Indtjuk  most már a saját registrinket, de már opeter03 felhazsnálóval
+
 `docker compose up -d`
 
 Ellenőrzés, fut-e
@@ -98,12 +105,12 @@ Ellenőrzés, fut-e
 http://localhost:8500
 
 Tesztelés, vagyis egy kép beletolása:
-docker pull nginx
-docker images
-docker tag nginx:latest docker-registry.local.com:5000/docker-registry/nginx:v1
-docker images
-docker push docker-registry.local.com:5000/docker-registry/nginx:v1
-docker pull docker-registry.local.com:5000/docker-registry/nginx:v1
+
+`docker pull nginx`
+
+`docker tag nginx:latest docker-registry.local.com:5000/docker-registry/nginx:v1`
+
+`docker push docker-registry.local.com:5000/docker-registry/nginx:v1`
 
 
 
