@@ -172,8 +172,7 @@ http://localhost:8090
 
 
 
-
-## +1
+## +1 (VIM text editor)
 
 kilépés mentés nélkül:
 
