@@ -117,6 +117,10 @@ Tesztelés, vagyis egy kép beletolása:
 
 A mellékelt testrepo/Dockerfile-ban található a project.
 
+A Github repo privat-tal lett tesztelve, de most átállításra került public státuszra:
+
+https://github.com/opeter03/testrepo
+
 ## Jenkins job létrehozása
 
 Létrehozzuk a jenkinsbe az új freestyle típusú jobot, adunk neki egy nevet, majd odagörgetünk a "Source Code Management" szekcióhoz és bepipáljuk a gitet.
