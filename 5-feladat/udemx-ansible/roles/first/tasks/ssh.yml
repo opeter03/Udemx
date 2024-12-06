@@ -1,0 +1,14 @@
+---
+- name: Set backup ssh config
+  become: yes
+  copy:
+    src: /etc/ssh/sshd_config
+    dest: /etc/ssh/sshd_config.backup
+
+- name: Change ssh port to 33333
+  become: yes
+  lineinfile:
+    dest: "/etc/ssh/sshd_config"
+    regexp: "^Port"
+    line: "Port 33333"
+  notify: "Restart sshd"

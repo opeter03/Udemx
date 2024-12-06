@@ -1,0 +1,27 @@
+---
+- name: Udemx Ansible playbook
+  vars:
+    compose_dir: "/home/opeter03/compose-demo5"
+    laravel_db_db: "udemx"
+    laravel_db_user: "udemx_user"
+    laravel_db_pw: "tNbxUECKq"
+    mariadb_db: "udemx-db"
+    mariadb_user: "udemx"
+    mariadb_pw: "FWLtLnbPIDUr"
+    mariadb_root_pw: "vvzPjX4Sh9QQ"
+  hosts: all
+  remote_user: opeter03
+  roles:
+    - first
+    - second
+    - third
+
+  handlers:
+  - name: Restart sshd
+    service:
+      name: sshd
+      state: restarted
+  - name: Restart fail2ban
+    service:
+      name: fail2ban
+      state: restarted

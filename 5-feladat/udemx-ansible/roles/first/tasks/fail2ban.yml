@@ -1,0 +1,14 @@
+---
+- name: install fail2ban
+  become: yes
+  apt:
+    name:
+      - fail2ban
+    update_cache: yes
+
+- name: Set fail2ban
+  become: yes
+  copy:
+    src: /etc/fail2ban/jail.conf
+    dest: /etc/fail2ban/jail.local
+  notify: "Restart fail2ban"

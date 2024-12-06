@@ -1,0 +1,7 @@
+---
+- name: install ntp only
+  become: yes
+  apt:
+    name:
+      - ntp
+    update_cache: yes

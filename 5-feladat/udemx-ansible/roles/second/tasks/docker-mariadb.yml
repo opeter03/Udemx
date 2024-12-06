@@ -1,0 +1,12 @@
+---
+- name: Pull mariadb
+  shell:
+    cmd: "docker pull mariadb"
+
+- name: Create Volume
+  shell:
+    cmd: "docker volume create mariadb-server-volume"
+
+- name: Run mariadb in docker container
+  shell: |
+    docker run -p 127.0.0.1:3306:3306 -v mariadb-server-volume:/var/lib/mysql --restart always --detach --name mariadb-server1 --env MARIADB_USER={{ mariadb_user }} --env MARIADB_PASSWORD={{ mariadb_pw }} --env MARIADB_DATABASE={{ mariadb_db }} --env MARIADB_ROOT_PASSWORD={{ mariadb_root_pw }}  mariadb:latest

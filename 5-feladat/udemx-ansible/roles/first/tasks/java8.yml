@@ -1,0 +1,17 @@
+---
+- name: check java 8 status
+  command: dpkg-query -W "java-1.8.0-amazon-corretto-jdk:amd64"
+  register: deb_package_check
+  failed_when: deb_package_check.rc > 1
+
+- name: fetch package
+  get_url:
+    url: "https://corretto.aws/downloads/latest/amazon-corretto-8-x64-linux-jdk.deb"
+    dest: "/tmp/amazon-corretto-8-x64-linux-jdk.deb"
+  when: deb_package_check.rc == 1
+
+- name: install java 8 package
+  become: true
+  apt:
+    deb: "/tmp/amazon-corretto-8-x64-linux-jdk.deb"
+  when: deb_package_check.rc == 1

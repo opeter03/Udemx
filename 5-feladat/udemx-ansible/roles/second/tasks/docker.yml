@@ -1,0 +1,38 @@
+---
+- name: Install required system packages
+  become: yes
+  apt:
+    pkg:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg2
+      - software-properties-common
+    state: latest
+    update_cache: true
+
+- name: Add Docker GPG apt Key
+  become: yes
+  apt_key:
+    url: https://download.docker.com/linux/debian/gpg
+    state: present
+
+- name: Add Docker Repository
+  become: yes
+  apt_repository:
+    repo: deb https://download.docker.com/linux/debian bullseye stable
+    state: present
+
+- name: Update apt and install docker-ce
+  become: yes
+  apt:
+    name: docker-ce
+    state: latest
+    update_cache: true
+
+- name: Add user to docker group
+  become: yes
+  user:
+    name: opeter03
+    groups: docker
+    append: yes

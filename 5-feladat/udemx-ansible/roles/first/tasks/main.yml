@@ -1,0 +1,30 @@
+---
+- name: Set backup sources.list
+  become: yes
+  copy:
+    src: /etc/apt/sources.list
+    dest: /etc/apt/sources.list.backup
+
+- name: install base things
+  become: yes
+  apt:
+    name:
+      - mc
+      - sudo
+      - htop
+      - makepasswd
+      - ntp
+    update_cache: yes
+
+- name: install java 11
+  become: yes
+  apt:
+    name:
+      - openjdk-11-jdk
+    update_cache: yes
+
+- import_tasks: java8.yml
+
+- import_tasks: ssh.yml
+
+- import_tasks: fail2ban.yml

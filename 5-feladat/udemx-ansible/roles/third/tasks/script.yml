@@ -1,0 +1,28 @@
+---
+- name: Scripts copy
+  become: yes
+  copy:
+    src: scripts/
+    dest: /root/scripts/
+    mode: a+x
+
+- name: Execute the script
+  become: yes
+  shell: "/root/scripts/{{ item }}"
+  with_items:
+    - "nginx.sh"
+    - "loadavg.sh"
+    - "last3logfiles.sh"
+    - "5dayslogfiles.sh"
+
+- name: MySQL Dump to cron
+  become: yes
+  become_method: sudo
+  cron:
+    name: "MySQL dump minden nap hajnali 2-kor"
+    user: "root"
+    weekday: "*"
+    minute: "0"
+    hour: "2"
+    job: "/root/scripts/mysqldump.sh >/dev/null 2>&1"
+    state: present
