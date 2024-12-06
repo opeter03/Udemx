@@ -76,7 +76,7 @@ Létrehozzuk a yaml fájlt (mellékelve)
 
 `touch docker-compose.yaml`
 
-Léterhozzuk a volume mappát, ahol lesznek tárolva a privát imagek
+Létrehozzuk a volume mappát, ahol lesznek tárolva a privát imagek
 
 `mkdir volume`
 
